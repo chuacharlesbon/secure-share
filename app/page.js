@@ -1,6 +1,5 @@
 'use client'
 import Image from 'next/image';
-import Head from 'next/head';
 import { ImFolderOpen } from 'react-icons/im';
 import { TiThMenuOutline } from 'react-icons/ti';
 import { useEffect, useState } from 'react';
@@ -180,7 +179,7 @@ export default function Home() {
       </div>
 
       <div className='w-full p-2 flex flex-row items-center border-b border-grey-400'>
-        <img
+        <Image
           class="h-10 w-10 rounded-full"
           src="/shield-logo.jpg"
           alt="Current profile photo"
