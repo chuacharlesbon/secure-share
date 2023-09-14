@@ -214,7 +214,7 @@ export default function Home() {
       <div className="w-400px rounded-lg border border-grey-100 p-4 flex flex-col justify-start items-start h-48">
         <>
         {
-          filelist.map((e) => <p className='text-sm text-blue-100 hover:underline hover:cursor-pointer mb-2'>
+          filelist.map((e) => <p key={e} className='text-sm text-blue-100 hover:underline hover:cursor-pointer mb-2'>
             {e.name} ({(e.size * 0.001).toFixed(1)}kb)
           </p>)
         }
@@ -224,7 +224,6 @@ export default function Home() {
       <form class="flex items-center space-x-6 border-b border-grey-400 pb-2">
         <div class="shrink-0">
           <ImFolderOpen className='text-blue-100 text-2xl'/>
-          <img class="hidden h-16 w-16 object-cover rounded-full" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1361&q=80" alt="Current profile photo" />
         </div>
         <label class="block">
           <span class="sr-only">Choose profile photo</span>
