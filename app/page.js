@@ -73,19 +73,6 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-stretch justify-between">
-      <Head>
-            <title>Secure Share | File Transfer Platform</title>
-            <link rel="icon" href="/shield-logo.jpg" />
-            <meta name="title" content="Secure Share | File Transfer Platform" />
-            <meta
-              name="description"
-              content="SecureShare: Safeguard your data with confidence during online file transfers. Discover a reliable solution for seamless and secure file sharing. Try it today!"
-            />
-            <meta property="og:title" content="Secure Share | File Transfer Platform" />
-            <meta property="og:description" content="SecureShare: Safeguard your data with confidence during online file transfers. Discover a reliable solution for seamless and secure file sharing. Try it today!" />
-            <meta property="og:image" content="https://media.istockphoto.com/id/1155041243/vector/gold-and-red-shield-icon-vector-illustration.jpg?s=612x612&w=0&k=20&c=Oc3RTFU6aKsd7BRpgW9VXHXxytkCE594yFGLpQYndlE=" />
-      </Head>
-
       <div className="hidden z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
           Get started by editing&nbsp;
