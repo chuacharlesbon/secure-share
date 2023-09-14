@@ -9,8 +9,9 @@ export const metadata = {
   openGraph: {
     title: 'Secure Share | File Transfer Platform',
     description: 'SecureShare: Safeguard your data with confidence during online file transfers. Discover a reliable solution for seamless and secure file sharing. Try it today!',
-    images: "https://media.istockphoto.com/id/1155041243/vector/gold-and-red-shield-icon-vector-illustration.jpg?s=612x612&w=0&k=20&c=Oc3RTFU6aKsd7BRpgW9VXHXxytkCE594yFGLpQYndlE="
+    images: "https://media.istockphoto.com/id/1155041243/vector/gold-and-red-shield-icon-vector-illustration.jpg?s=612x612&w=0&k=20&c=Oc3RTFU6aKsd7BRpgW9VXHXxytkCE594yFGLpQYndlE=",
   },
+  keywords: "Secure Share, SecureShare, Charles Bon Chua, file transfer, share file, share it."
 }
 
 export default function RootLayout({ children }) {
