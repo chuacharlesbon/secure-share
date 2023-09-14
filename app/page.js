@@ -180,9 +180,11 @@ export default function Home() {
 
       <div className='w-full p-2 flex flex-row items-center border-b border-grey-400'>
         <Image
-          class="h-10 w-10 rounded-full"
+          className="h-10 w-10 rounded-full"
           src="/shield-logo.jpg"
           alt="Current profile photo"
+          width={40}
+          height={40}
         />
         <div className='w-4'/>
         <p className="text-red-400 text-2xl font-bold">
@@ -226,7 +228,9 @@ export default function Home() {
         </div>
         <label class="block">
           <span class="sr-only">Choose profile photo</span>
-          <input id="fileInput" onChanged={() => {}} type="file" class="block w-full text-sm text-slate-500 hover:file:cursor-pointer hover:file:bg-blue-200 hover:file:text-white file:transition file:duration-500
+          <input id="fileInput" onChanged={(e) => {
+            console.log('trigger onChanged')
+          }} type="file" class="block w-full text-sm text-slate-500 hover:file:cursor-pointer hover:file:bg-blue-200 hover:file:text-white file:transition file:duration-500
             file:mr-4 file:py-2 file:px-4
             file:rounded-full file:border-0
             file:text-sm file:font-semibold
