@@ -257,12 +257,12 @@ export default function Home() {
       </div>
 
       <div className='w-full flex flex-col items-center'>
-      <div className='w-400px py-4'>
+      <div className='w-300px tablet:w-400px py-4'>
       <p className=''>
         Files(<span>{filelist.length}</span>)
       </p>
       </div>
-      <div className="w-400px rounded-lg border border-grey-100 p-4 flex flex-col justify-start items-start h-48">
+      <div className="w-300px tablet:w-400px rounded-lg border border-grey-100 p-4 flex flex-col justify-start items-start h-48">
         <>
         {
           filelist.map((e) => <div className='w-full flex flex-row items-end justify-between' key={e.name}>
@@ -279,7 +279,7 @@ export default function Home() {
         </>
       </div>
       <div className='h-8'/>
-      <form className="flex items-center space-x-6 border-b border-grey-400 pb-2">
+      <form className="w-300px tablet:w-400px px-4 flex items-center space-x-6 border-b border-grey-400 pb-2">
         <div className="shrink-0">
           <ImFolderOpen className='text-blue-100 text-2xl'/>
         </div>
@@ -324,7 +324,7 @@ export default function Home() {
           onClick={() => {
             setSelectedFile(null)
             setFilelist([])
-            document.getElementById('fileInput').value = "";
+            /* document.getElementById('fileInput').value = ""; */
           }}
         >
           Clear
