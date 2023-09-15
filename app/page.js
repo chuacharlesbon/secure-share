@@ -262,7 +262,7 @@ export default function Home() {
         Files(<span>{filelist.length}</span>)
       </p>
       </div>
-      <div className="w-300px tablet:w-400px rounded-lg border border-grey-100 p-4 flex flex-col justify-start items-start h-48">
+      <div className="w-300px tablet:w-400px rounded-lg border border-grey-100 p-4 flex flex-col justify-start items-start h-48 overflow-y-auto">
         <>
         {
           filelist.map((e) => <div className='w-full flex flex-row items-end justify-between' key={e.name}>
