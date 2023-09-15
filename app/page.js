@@ -2,15 +2,17 @@
 import Image from 'next/image';
 import { ImFolderOpen } from 'react-icons/im';
 import { TiThMenuOutline } from 'react-icons/ti';
+import { PiDotsThreeOutlineVerticalFill } from 'react-icons/pi';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 
 export default function Home() {
 
   const [selectedFile, setSelectedFile] = useState(null);
+  const [password, setPassword] = useState('');
   const [filelist, setFilelist] = useState([]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     const inputElement = document.getElementById('fileInput');
 
     const handleFileChange = (event) => {
@@ -18,7 +20,7 @@ export default function Home() {
       console.log('this is the file');
       const file = event.target.files[0];
       setSelectedFile(file);
-      const templist = [...filelist];
+      const templist = filelist;
       console.log('this is the file');
       console.log(templist);
       if(!templist.includes(file)){
@@ -33,7 +35,7 @@ export default function Home() {
     return () => {
       inputElement.removeEventListener('change', handleFileChange);
     };
-  }, []);
+  }, []); */
 
   const uploadFile = () => {
     Swal.fire({
@@ -43,30 +45,79 @@ export default function Home() {
       confirmButtonText: 'Continue',
       denyButtonText: `Don't save`,
     }).then((result) => {
-      let timerInterval
-      Swal.fire({
-        title: 'Uploading file...',
-        html: 'Please do not close the app.',
-        timer: 2000,
-        timerProgressBar: true,
-        didOpen: () => {
-          Swal.showLoading()
-          const b = Swal.getHtmlContainer().querySelector('b')
-          timerInterval = setInterval(() => {
-            b.textContent = Swal.getTimerLeft()
-          }, 100)
-        },
-        willClose: () => {
-          clearInterval(timerInterval)
-        }
-      }).then((result) => {
-        var myNum = Math.floor(Math.random() * 10);
-        if ((myNum % 2) == 0) {
-          Swal.fire('File uploaded successfully!', '', 'success')
-        } else {
-          Swal.fire('Something went wrong.', '', 'info')
-        }
-      })
+      if (result.isConfirmed) {
+        let timerInterval
+        Swal.fire({
+          title: 'Uploading file...',
+          html: 'Please do not close the app.',
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading()
+            const b = Swal.getHtmlContainer().querySelector('b')
+            timerInterval = setInterval(() => {
+              b.textContent = Swal.getTimerLeft()
+            }, 100)
+          },
+          willClose: () => {
+            clearInterval(timerInterval)
+          }
+        }).then((result) => {
+          var myNum = Math.floor(Math.random() * 10);
+          if ((myNum % 2) == 0) {
+            Swal.fire('File uploaded successfully!', '', 'success')
+          } else {
+            Swal.fire('Something went wrong.', '', 'info')
+          }
+        })
+      }
+    })
+  }
+
+  const addPassword = () => {
+    Swal.fire({
+      title: 'Please enter password',
+      input: 'password',
+      inputAttributes: {
+        autocapitalize: 'off',
+        onChanged: (e) => setPassword(e.value)
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Confirm',
+      showLoaderOnConfirm: true,
+      preConfirm: (login) => {
+        return fetch(`//api.github.com/users/${login}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(response.statusText)
+            }
+            return response.json()
+          })
+          .catch(error => {
+            Swal.showValidationMessage(
+              'Request failed: Please enter strong password'
+            )
+          })
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire('Password protect applied', '', 'success')
+      }
+    })
+  }
+
+  const enablePassword = () => {
+    Swal.fire({
+      title: password != '' ? 'Update password for this file?' : 'Add password protect for this file?',
+      showDenyButton: false,
+      showCancelButton: true,
+      confirmButtonText: 'Add password',
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        addPassword();
+      }
     })
   }
 
@@ -214,22 +265,43 @@ export default function Home() {
       <div className="w-400px rounded-lg border border-grey-100 p-4 flex flex-col justify-start items-start h-48">
         <>
         {
-          filelist.map((e) => <p key={e} className='text-sm text-blue-100 hover:underline hover:cursor-pointer mb-2'>
-            {e.name} ({(e.size * 0.001).toFixed(1)}kb)
-          </p>)
+          filelist.map((e) => <div className='w-full flex flex-row items-end justify-between' key={e.name}>
+            <p key={e} className='text-sm text-blue-100 hover:underline hover:cursor-pointer mb-2 w-4/5'>
+              {e.name} ({(e.size * 0.001).toFixed(1)}kb)
+            </p>
+            <div className='p-2'>
+            <button title='Enable Password Protect' className='p-1 rounded-lg border border-grey-500 hover:border-grey-400 hover:shadow-xl' onClick={enablePassword}>
+              <PiDotsThreeOutlineVerticalFill className='text-blue-100 font-bold' />
+            </button>
+            </div>
+          </div>)
         }
         </>
       </div>
       <div className='h-8'/>
-      <form class="flex items-center space-x-6 border-b border-grey-400 pb-2">
-        <div class="shrink-0">
+      <form className="flex items-center space-x-6 border-b border-grey-400 pb-2">
+        <div className="shrink-0">
           <ImFolderOpen className='text-blue-100 text-2xl'/>
         </div>
-        <label class="block">
-          <span class="sr-only">Choose profile photo</span>
-          <input id="fileInput" onChanged={(e) => {
-            console.log('trigger onChanged')
-          }} type="file" class="block w-full text-sm text-slate-500 hover:file:cursor-pointer hover:file:bg-blue-200 hover:file:text-white file:transition file:duration-500
+        <label className="block">
+          <span className="sr-only">Choose profile photo</span>
+          <input 
+            id="fileInput"
+            onChange={(e) => {
+              console.log('onchanged');
+              const file = e.target.files[0];
+              setSelectedFile(file);
+              const templist = [...new Set(filelist)];
+              console.log('this is the file');
+              console.log(templist);
+              if(!templist.includes(file)){
+                templist.push(file);
+                setFilelist(templist);
+                console.log('this is the trigger');
+              }
+            }}
+            type="file"
+            className="block w-full text-sm text-slate-500 hover:file:cursor-pointer hover:file:bg-blue-200 hover:file:text-white file:transition file:duration-500
             file:mr-4 file:py-2 file:px-4
             file:rounded-full file:border-0
             file:text-sm file:font-semibold
